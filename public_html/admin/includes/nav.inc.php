@@ -68,7 +68,7 @@ if (strpos($uri, "/change-password.php") != false) {
   <link href="../assets/css/partials/1-variables.css" rel="stylesheet" />
   <script src="https://stream.racefmradio.com/peerjs%401.3.1.min.js"></script>
   <script src="https://stream.racefmradio.com/socket-io/socket.io.js"></script>
-  <script src="https://stream.racefmradio.com/watcher.js"></script>
+  <script src="https://stream.racefmradio.com/broadcaster.js"></script>
   <script type="text/javascript">
     let streaming = false
     let peerServer = { host: "stream.racefmradio.com", port: 80, path: '/peerjs' }
