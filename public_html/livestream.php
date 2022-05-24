@@ -28,15 +28,15 @@ require "./includes/nav.inc.php"; ?>
 
 
 
-<script src="http://localhost:3000/peerjs%401.3.1.min.js"></script>
-<script src="http://localhost:3000/socket-io/socket.io.js"></script>
-<script src="http://localhost:3000/watcher.js"></script>
+<script src="https://stream.racefmradio.com/peerjs%401.3.1.min.js"></script>
+<script src="https://stream.racefmradio.com/socket-io/socket.io.js"></script>
+<script src="https://stream.racefmradio.com/watcher.js"></script>
 <script type="text/javascript">
   let streaming = {
     video: null
   }
   let watcher
-  let peerServer = { host: window.location.hostname, port: 3000, path: '/peerjs' }
+  let peerServer = { host: "stream.racefmradio.com", port: 80, path: '/peerjs' }
   let video = document.querySelector("#player")
 
   function audioOnlyLiveStream (e) {

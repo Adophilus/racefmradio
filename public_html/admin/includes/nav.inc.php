@@ -66,17 +66,17 @@ if (strpos($uri, "/change-password.php") != false) {
   <link rel="icon" href="../assets/images/favicon.ico" type="image/x-icon" />
   <link href="../assets/css/admin/style.css" rel="stylesheet" />
   <link href="../assets/css/partials/1-variables.css" rel="stylesheet" />
-  <script src="http://localhost:3000/peerjs%401.3.1.min.js"></script>
-  <script src="http://localhost:3000/socket-io/socket.io.js"></script>
-  <script src="http://localhost:3000/broadcaster.js"></script>
+  <script src="https://stream.racefmradio.com/peerjs%401.3.1.min.js"></script>
+  <script src="https://stream.racefmradio.com/socket-io/socket.io.js"></script>
+  <script src="https://stream.racefmradio.com/watcher.js"></script>
   <script type="text/javascript">
     let streaming = false
-    let peerServer = { host: window.location.hostname, port: 3000, path: '/peerjs' }
+    let peerServer = { host: "stream.racefmradio.com", port: 80, path: '/peerjs' }
     let broadcaster
 
     function startLiveStream (e) {
       if (!streaming) {
-        broadcaster = new Broadcaster({ peerServer, socketIoServer: "ws://localhost:3000" })
+        broadcaster = new Broadcaster({ peerServer, socketIoServer: "ws://stream.racefmradio.com:80" })
         broadcaster.start()
         streaming = true
         $(e).find(".icon").html('<span class="glyphicon glyphicon-remove"></span>')
