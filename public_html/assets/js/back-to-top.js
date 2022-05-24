@@ -1,7 +1,6 @@
-
 topnavButton = document.getElementById("topNavBtn");
 window.onscroll = function () {
-  scrollFunction()
+  scrollFunction();
 };
 
 function scrollFunction() {

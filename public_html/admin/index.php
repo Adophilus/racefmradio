@@ -1,22 +1,19 @@
 <?php
-  require('./includes/nav.inc.php');
-  
-?>
+require "./includes/nav.inc.php"; ?>
 
 
 <section id="main">
   <div class="container">
     <div class="row">
       <?php
-
-        $user_sql =  "SELECT COUNT(user_id) 
+      $user_sql = "SELECT COUNT(user_id) 
                         AS no_of_users 
                         FROM user";
-        $user_result = mysqli_query($con,$user_sql);
-        $user_data = mysqli_fetch_assoc($user_result);
-        $no_of_users = $user_data['no_of_users'];
-                
-        require('./includes/quick-links.inc.php');
+      $user_result = mysqli_query($con, $user_sql);
+      $user_data = mysqli_fetch_assoc($user_result);
+      $no_of_users = $user_data["no_of_users"];
+
+      require "./includes/quick-links.inc.php";
       ?>
       <div class="col-md-9">
         <!-- Website Overview -->
@@ -29,7 +26,7 @@
               <div class="well dash-box">
                 <h2>
                   <span class="glyphicon glyphicon-pencil"></span>
-                  <?php echo $no_of_articles;?>
+                  <?php echo $no_of_articles; ?>
                 </h2>
                 <h4>Articles</h4>
               </div>
@@ -38,7 +35,7 @@
               <div class="well dash-box">
                 <h2>
                   <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
-                  <?php echo $no_of_categories;?>
+                  <?php echo $no_of_categories; ?>
                 </h2>
                 <h4>Categories</h4>
               </div>
@@ -47,7 +44,7 @@
               <div class="well dash-box">
                 <h2>
                   <span class="glyphicon glyphicon-user"></span>
-                  <?php echo $no_of_users;?>
+                  <?php echo $no_of_users; ?>
                 </h2>
                 <h4>Users</h4>
               </div>
@@ -61,8 +58,7 @@
     <!-- Latest Articles -->
     <div class="row">
       <?php
-
-        $sql = "SELECT article.article_title, 
+      $sql = "SELECT article.article_title, 
                 article.article_date, 
                 article.article_image, 
                 category.category_name,
@@ -72,9 +68,8 @@
                 AND article.author_id  = author.author_id
                 ORDER BY article_date DESC
                 LIMIT 4";
-        $result = mysqli_query($con,$sql);
-        $row = mysqli_num_rows($result);
-        
+      $result = mysqli_query($con, $sql);
+      $row = mysqli_num_rows($result);
       ?>
       <div class="col-md-12">
         <div class="panel panel-default">
@@ -90,32 +85,41 @@
                 <th>Author Name</th>
                 <th>Published On</th>
               </tr>
-              <?php
-                if($row > 0) {
-                  while($data = mysqli_fetch_assoc($result)) {
-                    $category_name = $data['category_name'];
-                    $author_name = $data['author_name'];
-                    $article_title = $data['article_title'];
-                    $article_image = $data['article_image'];
-                    $article_date = $data['article_date'];
-                    $article_date = date("d M y",strtotime($article_date));
+              <?php if ($row > 0) {
+                  while ($data = mysqli_fetch_assoc($result)) {
+                      $category_name = $data["category_name"];
+                      $author_name = $data["author_name"];
+                      $article_title = $data["article_title"];
+                      $article_image = $data["article_image"];
+                      $article_date = $data["article_date"];
+                      $article_date = date("d M y", strtotime($article_date));
 
-                    echo '
+                      echo '
                       <tr>
                         <td>
-                          '.$article_title.'
+                          ' .
+                          $article_title .
+                          '
                         </td>
                         <td>
-                          '.$category_name.'
+                          ' .
+                          $category_name .
+                          '
                         </td>
                         <td>
-                          <img src="../assets/images/articles/'.$article_image.'" />
+                          <img src="../assets/images/articles/' .
+                          $article_image .
+                          '" />
                         </td>
                         <td>
-                          '.$author_name.'
+                          ' .
+                          $author_name .
+                          '
                         </td>
                         <td>
-                          '.$article_date.'
+                          ' .
+                          $article_date .
+                          '
                         </td>
                       </tr>
                     ';
@@ -127,17 +131,17 @@
                       </td>
                     </tr>
                   ';
-                }
-                else {
+              } else {
                   echo '
                     <td colspan="4" align="center" style="padding-top: 28px; color: var(--active-color);">
                       <h4>
-                        You need to start writing '.$_SESSION['AUTHOR_NAME'].' !
+                        You need to start writing ' .
+                      $_SESSION["AUTHOR_NAME"] .
+                      ' !
                       </h4>
                     </td>
                   ';
-                }
-              ?>
+              } ?>
             </table>
           </div>
         </div>
@@ -146,6 +150,5 @@
   </div>
 </section>
 
-<?php
-  require('./includes/footer.inc.php')
+<?php require "./includes/footer.inc.php";
 ?>

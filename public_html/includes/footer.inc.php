@@ -27,35 +27,31 @@
       <h2>Categories</h2>
       <ul class="box">
         <?php
-
-          // Category Query to fetch random 3 categories
-  	      $categoryQuery= " SELECT  category_id, category_name
+        // Category Query to fetch random 3 categories
+        $categoryQuery = " SELECT  category_id, category_name
                             FROM category 
                             ORDER BY RAND() LIMIT 3";
 
-          // Running Category Query
-          $result = mysqli_query($con,$categoryQuery);
+        // Running Category Query
+        $result = mysqli_query($con, $categoryQuery);
 
-          // Returns the number of rows from the result retrieved.
-          $row = mysqli_num_rows($result);
+        // Returns the number of rows from the result retrieved.
+        $row = mysqli_num_rows($result);
 
+        // If query has any result (records) => If there are categories
+        if ($row > 0) {
+            // Fetching the data of particular record as an Associative Array
+            while ($data = mysqli_fetch_assoc($result)) {
 
-          // If query has any result (records) => If there are categories
-          if($row > 0) {
-
-          // Fetching the data of particular record as an Associative Array
-          while($data = mysqli_fetch_assoc($result)) {
-
-            // Storing the category data in variables
-            $category_id = $data['category_id'];
-            $category_name = $data['category_name'];
-            
-        ?>
-        <li><a href="articles.php?id=<?php echo $category_id ?>"><?php echo $category_name ?></a></li>
-        <?php  
-              }
+                // Storing the category data in variables
+                $category_id = $data["category_id"];
+                $category_name = $data["category_name"];
+                ?>
+        <li><a href="articles.php?id=<?php echo $category_id; ?>"><?php echo $category_name; ?></a></li>
+        <?php
             }
-          ?>
+        }
+        ?>
         <li><a href="./categories.php">More +</a></li>
       </ul>
     </li>
@@ -71,7 +67,11 @@
     </li>
   </ul>
   <div class="footer-bottom">
-    <p>All Rights Reserved | Copyright &copy; <?php echo date("D")?> <?php echo date("M")?> <script>document.write(new Date().getFullYear())</script> </p>RaceFM Online Radio</p>
+    <p>All Rights Reserved | Copyright &copy; <?php echo date(
+        "D"
+    ); ?> <?php echo date(
+     "M"
+ ); ?> <script>document.write(new Date().getFullYear())</script> </p>RaceFM Online Radio</p>
   </div>
 </footer>
 

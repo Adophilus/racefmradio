@@ -1,42 +1,38 @@
 <?php
-  require('./includes/nav.inc.php');
-  
-  if (isset($_POST['submit'])) { 
-    
-    if(isset($_SESSION['AUTHOR_ID'])){ 
-      $author_id = $_SESSION['AUTHOR_ID'];
+require "./includes/nav.inc.php";
+
+if (isset($_POST["submit"])) {
+    if (isset($_SESSION["AUTHOR_ID"])) {
+        $author_id = $_SESSION["AUTHOR_ID"];
+    } else {
+        alert("Please Login to Enter Author Portal");
+        redirect("../author-login.php");
     }
-    else {
-      alert("Please Login to Enter Author Portal");
-      redirect('../author-login.php');
-    }  
-    
-    $old_name = $_POST['old_name'];
-    $new_name = $_POST['new_name'];
-    $confirm_name = $_POST['confirm_name'];
+
+    $old_name = $_POST["old_name"];
+    $new_name = $_POST["new_name"];
+    $confirm_name = $_POST["confirm_name"];
 
     $sql = "SELECT author_name FROM author 
             WHERE author_id = {$author_id}
             AND author_name = '{$old_name}'";
-    $result = mysqli_query($con,$sql);
+    $result = mysqli_query($con, $sql);
     $rows = mysqli_num_rows($result);
-    if($rows > 0) {
-      $update_sql = " UPDATE author 
+    if ($rows > 0) {
+        $update_sql = " UPDATE author 
                       SET author_name = '{$new_name}'
                       WHERE author_id = {$author_id}";
-      $update_result = mysqli_query($con,$update_sql);
-      if(!$update_result) {
-        alert("Sorry. Try again later !");
-      }
-      else {
-        $_SESSION['AUTHOR_NAME'] = $new_name;
-        alert("Name Updated !");
-      }
+        $update_result = mysqli_query($con, $update_sql);
+        if (!$update_result) {
+            alert("Sorry. Try again later !");
+        } else {
+            $_SESSION["AUTHOR_NAME"] = $new_name;
+            alert("Name Updated !");
+        }
+    } else {
+        alert("Wrong Name. Try again !");
     }
-    else {
-      alert("Wrong Name. Try again !");
-    }
-  }
+}
 ?>
 
 <section id="breadcrumb">
@@ -52,9 +48,7 @@
 <section id="main">
   <div class="container">
     <div class="row">
-      <?php
-        require('./includes/quick-links.inc.php');
-      ?>
+      <?php require "./includes/quick-links.inc.php"; ?>
       <div class="col-md-9">
         <div class="panel panel-default">
           <div class="panel-heading main-color-bg">
@@ -94,6 +88,5 @@
   <script src="../assets/js/admin/change-name-validate.js"></script>
 </section>
 
-<?php
-  require('./includes/footer.inc.php')
+<?php require "./includes/footer.inc.php";
 ?>

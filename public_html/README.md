@@ -77,45 +77,59 @@ four modules being:
 ## Project Screenshots
 
 #### Home Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/home.png" width="500">
 
 #### Categories Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/categories.png" width="500">
 
 #### Search Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/search.png" width="500">
 
 #### Login & Signup Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/login.png" width="500">
 
 #### Bookmarks Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/bookmarks.png" width="500">
 
 #### Change Password Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/changePassword.png" width="500">
 
 #### Author Dashboard Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/authorPanelDashboard.png" width="500">
 
 #### Add Article Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/authorPanelAddArticle.png" width="500">
 
 #### Edit Article Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/authorPanelEditArticle.png" width="500">
 
 #### All Articles Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/authorPanelArticles.png" width="500">
 
 #### Author Change Name Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/authorPanelChangeName.png" width="500">
 
 #### Admin Login Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/adminPanelLogin.png" width="500">
 
 #### Admin Manage Articles Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/adminPanelArticles.png" width="500">
 
 #### Admin Manage Category Page
+
 <img src="https://github.com/Anish-U/NewsGrid/blob/master/screenshots/adminPanelCategories.png" width="500">
 
 ---
@@ -127,6 +141,7 @@ four modules being:
 ```git
  $ git clone https://github.com/Anish-U/NewsGrid.git
 ```
+
 or download the project via GitHub
 
 #### 2. Move project folder to htdocs folder

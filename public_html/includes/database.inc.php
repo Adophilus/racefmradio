@@ -14,7 +14,7 @@ $pass = "Racefmradio.com@2022";
 $db = "racezpdg_racefm";
 
 // Creating a connection to the DataBase
-$con = mysqli_connect($host,$user,$pass,$db);
+$con = mysqli_connect($host, $user, $pass, $db);
 
 /* Deployment Connection
 
@@ -29,5 +29,5 @@ $con = mysqli_connect($host, $user, $pass, $db, $port);
 
 // Checking If the connection is obtained
 if (!$con) {
-  die("Database Connection Error");
+    die("Database Connection Error");
 }

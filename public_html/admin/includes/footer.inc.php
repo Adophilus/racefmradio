@@ -1,5 +1,9 @@
 <footer id="footer">
-  <p>All Rights Reserved | Copyright &copy; <?php echo date("D")?> <?php echo date("M")?> <script>document.write(new Date().getFullYear())</script> </p>RaceFM Online Radio
+  <p>All Rights Reserved | Copyright &copy; <?php echo date(
+      "D"
+  ); ?> <?php echo date(
+     "M"
+ ); ?> <script>document.write(new Date().getFullYear())</script> </p>RaceFM Online Radio
 </footer>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -1,82 +1,83 @@
 <?php
-  require('./includes/nav.inc.php');
-  
-  if(isset($_GET['id'])) {
-    $article_id = $_GET['id'];
-  }else {
-    redirect('./articles.php');
-  }
-  if($article_id == '' || $article_id == null) {
-    redirect('./articles.php');
-  } 
+require "./includes/nav.inc.php";
 
-  
-  if (isset($_POST['submit'])) { 
-    
-    if(isset($_SESSION['AUTHOR_ID'])){ 
-      $author_id = $_SESSION['AUTHOR_ID'];
-    }
-    else {
-      alert("Please Login to Enter Author Portal");
-      redirect('../author-login.php');
-    }
-    $article_id = $_GET['id'];
-    $article_title = $_POST['article_title'];
-    $article_desc = $_POST['article_desc'];
-    $article_cat_id = $_POST['category_id'];
-    $article_old_img = $_POST['article_old_img'];
+if (isset($_GET["id"])) {
+    $article_id = $_GET["id"];
+} else {
+    redirect("./articles.php");
+}
+if ($article_id == "" || $article_id == null) {
+    redirect("./articles.php");
+}
 
-    $article_title = str_replace('"','\"',$article_title);
-    $article_desc = str_replace('"','\"',$article_desc);
-    
-    if(empty($_FILES['article_img']['name'])) {
-      $basename = $article_old_img;
-      $sql = "UPDATE article
+if (isset($_POST["submit"])) {
+    if (isset($_SESSION["AUTHOR_ID"])) {
+        $author_id = $_SESSION["AUTHOR_ID"];
+    } else {
+        alert("Please Login to Enter Author Portal");
+        redirect("../author-login.php");
+    }
+    $article_id = $_GET["id"];
+    $article_title = $_POST["article_title"];
+    $article_desc = $_POST["article_desc"];
+    $article_cat_id = $_POST["category_id"];
+    $article_old_img = $_POST["article_old_img"];
+
+    $article_title = str_replace('"', '\"', $article_title);
+    $article_desc = str_replace('"', '\"', $article_desc);
+
+    if (empty($_FILES["article_img"]["name"])) {
+        $basename = $article_old_img;
+        $sql = "UPDATE article
             SET  category_id = \"$article_cat_id\",
             article_title = \"$article_title\",
             article_description = \"$article_desc\"
             WHERE article_id = $article_id";
 
-      $result = mysqli_query($con, $sql); 
+        $result = mysqli_query($con, $sql);
 
-      if($result) {
-        alert("Article updated ".$author_name." !");
-        redirect('./articles.php');
-      }
+        if ($result) {
+            alert("Article updated " . $author_name . " !");
+            redirect("./articles.php");
+        }
+    } else {
+        $name = "article-" . $article_cat_id . "-" . time();
+        $extension = pathinfo(
+            $_FILES["article_img"]["name"],
+            PATHINFO_EXTENSION
+        );
+        $basename = $name . "." . $extension;
+        $name = "article-" . $article_cat_id . "-" . time();
+        $extension = pathinfo(
+            $_FILES["article_img"]["name"],
+            PATHINFO_EXTENSION
+        );
+        $basename = $name . "." . $extension;
 
-    }
-    else {
-      $name   = 'article-'.$article_cat_id.'-'.time(); 
-      $extension  = pathinfo( $_FILES["article_img"]["name"], PATHINFO_EXTENSION ); 
-      $basename   = $name . "." . $extension; 
-      $name   = 'article-'.$article_cat_id.'-'.time(); 
-      $extension  = pathinfo( $_FILES["article_img"]["name"], PATHINFO_EXTENSION ); 
-      $basename   = $name . "." . $extension; 
+        $tempname = $_FILES["article_img"]["tmp_name"];
 
-      $tempname = $_FILES["article_img"]["tmp_name"];     
+        $folder = "../assets/images/articles/{$basename}";
 
-      $folder = "../assets/images/articles/{$basename}";   
-
-      $sql = "UPDATE article
+        $sql = "UPDATE article
             SET  category_id = \"$article_cat_id\",
             article_title = \"$article_title\",
             article_image = \"$basename\",
             article_description = \"$article_desc\"
             WHERE article_id = $article_id";
 
-      $result = mysqli_query($con, $sql); 
-      
-      if($result) { 
-        unlink("../assets/images/articles/{$article_old_img}");
-        move_uploaded_file($tempname, $folder);
-        // echo "Data uploaded successfully"; 
-        alert("Article updated ".$author_name." !");
-        redirect('./articles.php');
-      }else{ 
-        echo "Failed to upload Data"; 
-      } 
-    }    
-  }
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            unlink("../assets/images/articles/{$article_old_img}");
+            move_uploaded_file($tempname, $folder);
+            // echo "Data uploaded successfully";
+            alert("Article updated " . $author_name . " !");
+            redirect("./articles.php");
+        } else {
+            echo "Failed to upload Data";
+        }
+    }
+}
 ?>
 
 <section id="breadcrumb">
@@ -93,7 +94,7 @@
   <div class="container">
     <div class="row">
       <?php
-        $sql = "SELECT article.article_title, 
+      $sql = "SELECT article.article_title, 
                 article.article_date, 
                 article.article_image, 
                 article.article_active, 
@@ -104,22 +105,21 @@
                 WHERE article.author_id = {$author_id} 
                 AND article.article_id = {$article_id}
                 AND article.category_id = category.category_id";
-        
-        $result = mysqli_query($con,$sql);
-        $row = mysqli_num_rows($result);
-        
-        if($row == 0) {
-          redirect('./articles.php');
-        }
-        
-        $data = mysqli_fetch_assoc($result);
-        $article_title = $data['article_title'];
-        $article_desc = $data['article_description'];
-        $article_cat_id = $data['category_id'];
-        $article_image = $data['article_image'];
 
-        require('./includes/quick-links.inc.php');
-      
+      $result = mysqli_query($con, $sql);
+      $row = mysqli_num_rows($result);
+
+      if ($row == 0) {
+          redirect("./articles.php");
+      }
+
+      $data = mysqli_fetch_assoc($result);
+      $article_title = $data["article_title"];
+      $article_desc = $data["article_description"];
+      $article_cat_id = $data["category_id"];
+      $article_image = $data["article_image"];
+
+      require "./includes/quick-links.inc.php";
       ?>
       <div class="col-md-9">
         <!-- Website Overview -->
@@ -139,25 +139,32 @@
                 <label>Category</label>
                 <select name="category_id" class="form-control" name="category" id="category">
                   <?php
-                    $cat_sql = "SELECT category_id, category_name FROM category ORDER BY category_name ASC";
-                    $cat_res = mysqli_query($con,$cat_sql);
-                    $cat_row = mysqli_num_rows($cat_res);
-                    
-                    while($cat_data = mysqli_fetch_assoc($cat_res)) {
+                  $cat_sql =
+                      "SELECT category_id, category_name FROM category ORDER BY category_name ASC";
+                  $cat_res = mysqli_query($con, $cat_sql);
+                  $cat_row = mysqli_num_rows($cat_res);
+
+                  while ($cat_data = mysqli_fetch_assoc($cat_res)) {
                       // echo "<pre>";
-                      // print_r($cat_data); 
-                      // echo "</pre>"; 
+                      // print_r($cat_data);
+                      // echo "</pre>";
                       $selected = "";
-                      $cat_id = $cat_data['category_id'];   
-                      $cat_name = $cat_data['category_name'];
-                      if($cat_id == $article_cat_id) {
-                        $selected = "selected";
+                      $cat_id = $cat_data["category_id"];
+                      $cat_name = $cat_data["category_name"];
+                      if ($cat_id == $article_cat_id) {
+                          $selected = "selected";
                       }
                       echo '
-                        <option value="'.$cat_id.'"'.$selected.'>'.$cat_name.'</option>
-                      ';   
-                    }
-                    ?>
+                        <option value="' .
+                          $cat_id .
+                          '"' .
+                          $selected .
+                          ">" .
+                          $cat_name .
+                          '</option>
+                      ';
+                  }
+                  ?>
                 </select>
               </div>
               <div class="form-group">
@@ -191,6 +198,5 @@
   <script src="../assets/js/admin/edit-form-validate.js"></script>
 </section>
 
-<?php
-  require('./includes/footer.inc.php')
+<?php require "./includes/footer.inc.php";
 ?>
