@@ -76,7 +76,7 @@ if (strpos($uri, "/change-password.php") != false) {
 
     function startLiveStream (e) {
       if (!streaming) {
-        broadcaster = new Broadcaster({ peerServer, socketIoServer: "ws://stream.racefmradio.com:80" })
+        broadcaster = new Broadcaster({ peerServer, socketIoServer: "wss://stream.racefmradio.com:80" })
         broadcaster.start()
         streaming = true
         $(e).find(".icon").html('<span class="glyphicon glyphicon-remove"></span>')
