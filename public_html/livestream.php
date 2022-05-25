@@ -36,7 +36,7 @@ require "./includes/nav.inc.php"; ?>
     video: null
   }
   let watcher
-  let peerServer = { host: "stream.racefmradio.com", port: 80, path: '/peerjs' }
+  let peerServer = { host: "stream.racefmradio.com", port: 443, path: '/peerjs' }
   let video = document.querySelector("#player")
 
   function audioOnlyLiveStream (e) {
@@ -54,7 +54,7 @@ require "./includes/nav.inc.php"; ?>
 
   function listenLiveStream (e) {
     if (!streaming.video) {
-      watcher = new Watcher({ video, peerServer, socketIoServer: "ws://localhost:3000" })
+      watcher = new Watcher({ video, peerServer, socketIoServer: "wss://stream.racefmradio.com" })
       streaming.video = true
       $(e).find(".statusText").html("End Stream")
     }
