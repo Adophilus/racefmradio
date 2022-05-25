@@ -71,7 +71,7 @@ if (strpos($uri, "/change-password.php") != false) {
   <script src="https://stream.racefmradio.com/broadcaster.js"></script>
   <script type="text/javascript">
     let streaming = false
-    let peerServer = { host: "stream.racefmradio.com", port: 80, path: '/peerjs' }
+    let peerServer = { host: "stream.racefmradio.com", port: 443, path: '/peerjs' }
     let broadcaster
 
     function startLiveStream (e) {
